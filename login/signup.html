@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .error-message {
+            color: red;
+        }
+        .color{
+            background-color: black;
+            color: white;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container shadow-lg">
+        <form class="form" id="signupForm">
+            <h2 class="text-center">Signup</h2>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Enter your username">
+                <small class="error-message" id="usernameError"></small>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email">
+                <small class="error-message" id="emailError"></small>
+            </div>
+            <div class="form-group">
+                <label for="password">Password </label>
+                <div class="input-group">
+                    <input type="password" class="form-control" id="password" placeholder="Enter your password">
+                    <!-- <div class="input-group-append">
+                        <button class="btn btn-outline-secondary" type="button" id="showPasswordBtn">
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                        </button>
+                    </div> -->
+                </div>
+                <small class="error-message" id="passwordError"></small>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block sub color" value="submit">Signup</button>
+            <p class="text-center">Already have an account? <a href="login.html">Login</a></p>
+        </form>
+    </div>
+
+    <script src="signup.js">  </script>
+</body>
+
+</html>

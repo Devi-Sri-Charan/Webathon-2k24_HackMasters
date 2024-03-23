@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Quiz</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .options label {
+            display: block;
+        }
+
+        .edit-delete-button {
+            margin-left: 10px;
+        }
+
+        #quiz,
+        #result,
+        #quizListForm {
+            display: none;
+        }
+
+        #timerDisplay {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #startQuizButton {
+            margin-bottom: 20px;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2 class="text-center mb-4">Quiz</h2>
+
+        <!-- Form to add quiz questions -->
+        <form method="get" class="form" action="page2.html" id="quizForm">
+            <div class="form-group">
+                <label for="question">Question</label>
+                <input type="text" class="form-control" id="question" placeholder="Enter your question">
+            </div>
+            <div class="form-group">
+                <label for="options">Options (Separate with comma)</label>
+                <input type="text" class="form-control" id="options" placeholder="Enter options">
+            </div>
+            <div class="form-group">
+                <label for="answer">Correct Answer</label>
+                <input type="text" class="form-control" id="answer" placeholder="Enter correct answer">
+            </div>
+            <div class="form-group">
+                <label for="type">Question Type</label>
+                <select class="form-control" id="type">
+                    <option value="single">Single Type</option>
+                    <option value="multiple">Multiple Type</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="marks">Marks for Correct Answer</label>
+                <input type="number" class="form-control" id="marks" placeholder="Enter marks">
+            </div>
+            <div class="form-group">
+                <label for="negativeMarks">Negative Marks for Incorrect Answer</label>
+                <input type="number" class="form-control" id="negativeMarks" placeholder="Enter negative marks">
+            </div>
+
+            <button type="button" class="btn btn-primary d-block mt-3 mx-auto" onclick="addQuestion()">Add
+                Question</button>
+        </form>
+
+        <!-- Start Quiz Button -->
+        <button id="startQuizButton" class="btn btn-primary d-block mt-3 mx-auto" onclick="startQuiz()">Start
+            Quiz</button>
+
+        <!-- Div to display quiz questions -->
+        <div id="quiz"></div>
+        <button id="submit" onclick="showResults()" class="btn btn-success d-block mt-3 mx-auto">Submit Quiz</button>
+
+        <div id="result" class="mt-3"></div>
+        <!-- Quiz Result Container -->
+        <div id="resultContainer" style="display: none;">
+            <h3>Quiz Result</h3>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+    <!-- Custom JavaScript -->
+    <script>
+        let quizData = [];
+        let timerInterval;
+
+        // Function to add a question to the quiz
+        function addQuestion() {
+            const question = document.getElementById('question').value.trim();
+            const options = document.getElementById('options').value.split(',').map(option => option.trim());
+            const answer = document.getElementById('answer').value.trim();
+            const type = document.getElementById('type').value;
+            const marks = parseInt(document.getElementById('marks').value);
+            const negativeMarks = parseInt(document.getElementById('negativeMarks').value);
+
+            if (question && options.length >= 2 && answer && type && marks && !isNaN(marks) && negativeMarks && !isNaN(negativeMarks)) {
+                const confirmation = confirm('Are you sure you want to add this question to the quiz?');
+                if (confirmation) {
+                    quizData.push({ question, options, answer, type, marks, negativeMarks });
+                    document.getElementById('quizForm').reset();
+                    buildQuiz();
+                }
+            } else {
+                alert('Please fill all fields correctly.');
+            }
+        }
+
+        // Function to build the quiz display
+        function buildQuiz() {
+            const quizContainer = document.getElementById('quiz');
+            quizContainer.innerHTML = '';
+            quizData.forEach((questionObj, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('question');
+                questionElement.innerHTML = `
+        <p>${index + 1}. ${questionObj.question}</p>
+        <div class="options">
+            ${questionObj.options.map(option => `<label><input type="${questionObj.type === 'single' ? 'radio' : 'checkbox'}" name="question${index}" value="${option}">${option}</label>`).join('')}
+        </div>
+        <button class="edit-delete-button btn btn-outline-primary btn-sm" onclick="editQuestion(${index})">Edit</button>
+        <button class="edit-delete-button btn btn-outline-danger btn-sm" onclick="deleteQuestion(${index})">Delete</button>
+        `;
+                quizContainer.appendChild(questionElement);
+            });
+            quizContainer.style.display = 'block';
+        }
+
+        // Function to edit a question
+        function editQuestion(index) {
+            const { question, options, answer, type, marks, negativeMarks, timer } =
+                quizData[index];
+            document.getElementById('question').value = question;
+
+            document.getElementById('options').value = options.join(', ');
+            document.getElementById('answer').value = answer;
+            document.getElementById('type').value = type;
+            document.getElementById('marks').value = marks;
+            document.getElementById('negativeMarks').value = negativeMarks;
+            // document.getElementById('timer').value = timer;
+            delete quizData[index];
+            buildQuiz();
+        }
+
+        // Function to delete a question
+        function deleteQuestion(index) {
+            quizData.splice(index, 1);
+            buildQuiz();
+        }
+
+        // Function to show quiz results
+        function showResults() {
+            const answerContainers = document.querySelectorAll('.options');
+            let totalScore = 0;
+
+            quizData.forEach((questionObj, index) => {
+                const userAnswers = Array.from(answerContainers[index].querySelectorAll(`input[name="question${index}"]:checked`)).map(input => input.value);
+                const correctAnswers = questionObj.answer.split(',');
+
+                let questionScore = 0;
+
+                if (questionObj.type === 'single') {
+                    // For single type questions, check if the user's answer matches the correct answer
+                    if (userAnswers.length === 1 && userAnswers[0] === correctAnswers[0]) {
+                        questionScore += questionObj.marks;
+                    } else {
+                        questionScore -= questionObj.negativeMarks;
+                    }
+                } else if (questionObj.type === 'multiple') {
+                    // For multiple type questions, check if all user's answers match the correct answers
+                    if (userAnswers.length === correctAnswers.length && userAnswers.every(answer => correctAnswers.includes(answer))) {
+                        questionScore += questionObj.marks;
+                    } else {
+                        questionScore -= questionObj.negativeMarks;
+                    }
+                }
+                totalScore += questionScore;
+
+                document.getElementById('submit').classList.add('hidden');
+            });
+
+            const resultContainer = document.getElementById('result');
+            resultContainer.innerHTML = `<h3>Quiz Result</h3>
+    <p>Total Score: ${totalScore}</p>`;
+            resultContainer.style.display = 'block';
+        }
+
+        // Function to start the quiz
+        function startQuiz() {
+            hideAll();
+            const startQuizButton = document.getElementById('startQuizButton');
+            startQuizButton.style.display = 'none';
+            buildQuiz();
+        }
+
+        function hideAll() {
+            const startQuizButton = document.getElementById('startQuizButton');
+            startQuizButton.style.visibility = 'hidden';
+
+            const form = document.getElementById('quizForm');
+            form.style.display = 'none';
+
+            buildQuiz();
+        }
+
+
+    </script>
+
+</body>
+
+</html>

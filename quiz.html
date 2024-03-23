@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickQuiz</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="quiz.css">
+
+</head>
+
+<body class="display">
+    <nav class="navbar nav navbar-expand-lg bg-body-tertiary" >
+        <div class="container-fluid" style="background-color: #858585;">
+            <a class="navbar-brand fs-1" href="#">Quizfinity</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active fs-4" aria-current="page" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active fs-4" href="#about">About Us</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle fs-4" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a class="nav-link disabled" aria-disabled="true"></a>
+                    </li> -->
+                    <!-- <li class="nav-item">
+                        <a href="#" class="nav-link"><i class="fa-solid fa-user"></i></a>
+                    </li> -->
+                </ul>
+                <!-- <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form> -->
+                <div class="btns d-flex">
+                    <a href="#profile.html" class="nav-link hide"><i class="fa-solid fa-user fs-3 m-auto text-black"></i></a>
+                    <a href="../Webathon-2.0/login/login.html"><button
+                            class="btn border-0 fs-4 text-white fw-semibold bg-black">Login/SignUp</button></a>
+                    <!-- <a href="../create/create.html" target="_blank"><button class="btn border border-danger fs-4">Create
+                            quiz</button></a> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div id="home" class="pt-5">
+        <div class="home d-flex justify-content-evenly">
+            <div class="left w-50 m-2 mb-1 d-flex flex-column p-5">
+                <h1 class="display-1 fw-bolder">Welcome to Quizfinity</h1>
+                <h1 class="tagline p-4 text-center"><span id="element"></span></h1>
+                <p class="matter lead">
+                    At Quizfinity, we're dedicated to revolutionizing online quizzing, providing an immersive learning
+                    and assessment environment for educators and learners alike. With our intuitive interface, robust
+                    features, and customizable options, we aim to make online quizzing engaging, accessible, and
+                    effective</p>
+
+                <h3>Get Started with Quizfinity</h3>
+                <p class="lead matter">
+
+                    Ready to experience the power of interactive quizzing? Sign up for a free account today and unlock a
+                    world of learning possibilities with Quizfinity!
+
+                </p>
+                <a href="../Webathon-2.0/create/create.html" target="_blank"><button
+                        class="btn fw-semibold fs-4 text-white bg-black">Create
+                        quiz</button></a>
+            </div>
+            <div class="right w-50 m-2 d-flex justify-content-center align-items-center">
+                <!-- <div class="loop cubes">
+                    <div class="item cubes"></div>
+                    <div class="item cubes"></div>
+                    <div class="item cubes"></div>
+                    <div class="item cubes"></div>
+                    <div class="item cubes"></div>
+                    <div class="item cubes"></div>
+                </div> -->
+                <img src="../webathon-2.0/images/hackathon.JPG" class="w-75 h-75 rounded-4 shadow-lg" alt="">
+            </div>
+        </div>
+        <section id="about" class="pt-3">
+            <div class="about m-2 mt-1 text-center container mx-auto p-5" id="about">
+                <h1 class="display-4 fw-bold">About Us</h1>
+                <p class="matter lead">
+                    Quizfinity was founded with the mission of making learning fun and interactive. Our team of experts
+                    is
+                    passionate about education and technology, and we believe that quizzes play a crucial role in
+                    enhancing
+                    learning outcomes and knowledge retention. With years of experience in educational technology, we've
+                    developed Quizfinity to meet the diverse needs of educators, students, and professionals.
+                </p>
+            </div>
+        </section>
+        <div class="key-features m-2 mt-1 text-center container mx-auto p-5">
+            <h1 class="display-4 fw-bold">Key Features</h1>
+            <ol class="text-start list-group list-group-numbered border-0">
+                <li class="lead matter list-group-item list-group-item-secondary">
+                    <span class="fw-semibold ">Admin Dashboard</span>: Create, manage, and schedule quizzes with ease
+                    using our comprehensive admin
+                    dashboard. Customize quiz settings, question formats, and scoring criteria to suit your specific
+                    requirements.
+                </li>
+                <li class="lead matter list-group-item">
+                    <span class="fw-semibold">Participant Registration</span>: Allow participants to register for
+                    accounts, providing them with
+                    personalized profiles where they can track their quiz scores, view performance analytics, and access
+                    past quiz results.
+                </li>
+                <li class="lead matter list-group-item list-group-item-secondary">
+                    <span class="fw-semibold">Diverse Question Types</span>: Support various question types, including
+                    multiple-choice, true/false, short
+                    answer, and essay questions, allowing you to create diverse and engaging quizzes tailored to
+                    different
+                    learning objectives
+                </li>
+                <li class="lead matter list-group-item">
+                    <span class="fw-semibold">Real-time Feedback and Analytics</span>: Provide instant feedback on quiz
+                    responses, including correct
+                    answers, explanations, and performance statistics. Access comprehensive analytics and reports to
+                    evaluate participant performance and identify areas for improvement.
+                </li>
+                <li class="lead matter list-group-item list-group-item-secondary">
+                    <span class="fw-semibold">Accessibility Features</span>: Design our platform with accessibility in
+                    mind, offering features such as
+                    adjustable font sizes, color contrast options, and screen reader compatibility to ensure that all
+                    participants, including those with disabilities, can fully engage with the platform.
+                </li>
+            </ol>
+        </div>
+        <!-- <div class="Contact m-2 mt-1 text-center container mx-auto p-5">
+            <h1 class="display-4 fw-bold">Contact Us</h1>
+        </div> -->
+    </div>
+    <section id="footer">
+        <div class="footer d-flex flex-column justify-content-center align-items-center p-3" style="background-color: #858585;">
+            <p class="lead fw-medium">Copyrights &copy; Quizfinity -All rights reserved <br>
+                &nbsp; &nbsp; &nbsp; Contact : quizfinityhelp@gmail.com </p>
+        </div>
+    </section>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['- Your Interactive Quiz Platform.'],
+            typeSpeed: 50,
+        });
+    </script>
+    <script src="quiz.js"></script>
+</body>
+
+</html>
